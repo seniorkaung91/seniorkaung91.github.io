@@ -5,46 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My CV - Kaung</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      background-color: #f5f5f5;
-      color: #333;
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      height: 100%;
+      background: black;
     }
-    h1, h2 {
-      color: #2c3e50;
+
+    /* Galaxy video background */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.25;
     }
+
+    h1 {
+      text-align: center;
+      color: #00d1ff;
+      text-shadow: 0 0 10px #00d1ff, 0 0 20px #00d1ff;
+      margin-top: 2rem;
+    }
+
     .section {
-      margin-bottom: 2rem;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
+
+    .section.show {
+      display: block;
+      opacity: 1;
+    }
+
     .job, .education {
-      background: #fff;
-      padding: 1rem 1.5rem;
-      margin-bottom: 1rem;
-      border-left: 5px solid #3498db;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      background: rgba(255, 255, 255, 0.08);
+      border-left: 4px solid #00d1ff;
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 15px rgba(0, 209, 255, 0.3);
+      transition: transform 0.3s ease;
     }
+
+    .job:hover, .education:hover {
+      transform: translateY(-5px);
+    }
+
     .job-title, .edu-title {
+      font-size: 1.2rem;
       font-weight: bold;
-      font-size: 1.1rem;
+      color: #ffd700;
     }
+
     .company, .school {
-      color: #555;
+      font-style: italic;
+      color: #b0c4de;
     }
-    .duration, .location {
+
+    .duration {
       font-size: 0.9rem;
-      color: #777;
+      color: #a0a0a0;
     }
+
     ul {
       margin-top: 0.5rem;
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .toggle-btn {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      background: transparent;
+      color: #00d1ff;
+      border: 2px solid #00d1ff;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      text-shadow: 0 0 5px #00d1ff;
+    }
+
+    .toggle-btn:hover {
+      background: #00d1ff22;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .job, .education {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>Work Experience</h1>
+  <!-- Galaxy Video Background -->
+  <video autoplay muted loop id="bg-video">
+    <source src="galaxy.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-  <div class="section">
+  <h1>My Resume</h1>
+
+  <button class="toggle-btn" onclick="toggleSection('workSection')">Work Experience</button>
+  <div id="workSection" class="section">
     <div class="job">
       <div class="job-title">Software Engineer</div>
       <div class="company">CWT Globelink Group · Full-time</div>
@@ -87,9 +169,8 @@
     </div>
   </div>
 
-  <h1>Education</h1>
-
-  <div class="section">
+  <button class="toggle-btn" onclick="toggleSection('eduSection')">Education</button>
+  <div id="eduSection" class="section">
     <div class="education">
       <div class="edu-title">Bachelor's Degree in Information Technology & Business</div>
       <div class="school">Singapore University of Social Sciences (SUSS)</div>
@@ -105,6 +186,13 @@
       <div class="school">Ngee Ann Polytechnic</div>
     </div>
   </div>
+
+  <script>
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      section.classList.toggle('show');
+    }
+  </script>
 
 </body>
 </html>
