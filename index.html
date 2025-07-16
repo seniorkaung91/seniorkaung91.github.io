@@ -191,10 +191,12 @@
     function toggleSection(id) {
       const section = document.getElementById(id);
       section.classList.toggle('show');
+
+      if (section.classList.contains('show')) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   </script>
 
 </body>
 </html>
-
- 
